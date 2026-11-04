@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Expense Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3001" }],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "health"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('health is ok', function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wallet members",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/wallet/members",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "wallet", "members"]
+        }
+      }
+    },
+    {
+      "name": "Categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/categories",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "categories"]
+        }
+      }
+    },
+    {
+      "name": "Create transfer",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Idempotency-Key", "value": "{{transferIdempotencyKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"targetUserId\": \"{{targetUserId}}\",\n  \"amountMinor\": \"100\",\n  \"currency\": \"MAD\",\n  \"amountMadMinor\": \"100\",\n  \"exchangeRate\": \"1\",\n  \"paymentMethod\": \"bank_transfer\",\n  \"transactionDate\": \"2026-11-04\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/transfers",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "transfers"]
+        }
+      }
+    },
+    {
+      "name": "Upload transaction attachment",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Idempotency-Key", "value": "{{attachmentIdempotencyKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"filename\": \"receipt.jpg\",\n  \"contentBase64\": \"/9j/AA==\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/transactions/{{transactionId}}/attachments",
+          "host": ["{{baseUrl}}"],
+          "path": [
+            "api",
+            "v1",
+            "transactions",
+            "{{transactionId}}",
+            "attachments"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Wallet roles",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/wallet/roles",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "wallet", "roles"]
+        }
+      }
+    },
+    {
+      "name": "Create wallet role",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Reviewer\",\n  \"permissions\": [\"wallet:read\", \"transactions:read\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/wallet/roles",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "wallet", "roles"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "expense-tracker",
+  "private": true,
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=24.0.0 <25.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @expense-tracker/web --filter @expense-tracker/api dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "format:check": "prettier --check 'apps/**/*.{ts,tsx,css,json}' 'packages/**/*.{ts,json}' 'scripts/**/*.mjs' 'postman/**/*.json' '*.json'",
+    "contract:check": "node ./scripts/check-contract.mjs"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}

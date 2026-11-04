@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "@expense-tracker/db": ["../../packages/db/src/index.ts"],
+      "@expense-tracker/domain": ["../../packages/domain/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

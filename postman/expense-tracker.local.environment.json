@@ -1,0 +1,11 @@
+{
+  "name": "Expense Tracker Local",
+  "values": [
+    { "key": "baseUrl", "value": "http://localhost:3001", "enabled": true },
+    { "key": "accessToken", "value": "", "enabled": true },
+    { "key": "transferIdempotencyKey", "value": "", "enabled": true },
+    { "key": "targetUserId", "value": "", "enabled": true },
+    { "key": "attachmentIdempotencyKey", "value": "", "enabled": true },
+    { "key": "transactionId", "value": "", "enabled": true }
+  ]
+}
